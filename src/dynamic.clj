@@ -53,7 +53,7 @@
 (defn draw
   []
   (q/no-loop)
-  (paint-gradient (get-in colours [:floral-white :bg-hue-low])
-                  (get-in colours [:floral-white :bg-hue-high]))
-  (paint-shape (get-in colours [:floral-white :shape-fill]))
+  (paint-gradient (get-in colours [:navajo-white :bg-hue-low])
+                  (get-in colours [:navajo-white :bg-hue-high]))
+  (paint-shape (get-in colours [:navajo-white :shape-fill]))
   (save-to-disk))
