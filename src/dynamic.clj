@@ -34,15 +34,20 @@
 
 (defn paint-shape
   [hue]
-  (q/stroke 36 32 75)
+  (q/stroke hue 32 75) ; Mute the hue slightly for the shape's outline.
   (q/fill hue 32 100)
   (q/begin-shape)
   (q/vertex (rand-int (q/width)) (rand-int (q/height)))
-  (dotimes [_ 11]
+  (dotimes [_ 3]
     (q/bezier-vertex (rand-int (q/width)) (rand-int (q/height))
                      (rand-int (q/width)) (rand-int (q/height))
                      (rand-int (q/width)) (rand-int (q/height))))
   (q/end-shape :close))
+
+(defn paint-shapes
+  [hue]
+  (dotimes [_ 3]
+    (paint-shape hue)))
 
 (defn- save-to-disk
   []
@@ -55,5 +60,5 @@
   (q/no-loop)
   (paint-gradient (get-in colours [:navajo-white :bg-hue-low])
                   (get-in colours [:navajo-white :bg-hue-high]))
-  (paint-shape (get-in colours [:navajo-white :shape-fill]))
+  (paint-shapes (get-in colours [:navajo-white :shape-fill]))
   (save-to-disk))
