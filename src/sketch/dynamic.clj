@@ -1,8 +1,9 @@
-(ns dynamic
+(ns sketch.dynamic
   (:require [clojure.pprint :as pp]
-            [quil.core :as q]))
+            [quil.core :as q]
+            #_[colours.core :as colours]))
 
-(def colours
+(def colour
   
   ; Use saturation and brightness = 90.
   {:yellow-green-brown {:bg-hue-low 60
@@ -19,7 +20,7 @@
                   :bg-hue-high 156
                   :shape-fill 36}})
 
-(defn setup
+(defn initialise
   []
   (q/color-mode :hsb 360 100 100 1.0))
 
@@ -49,16 +50,20 @@
   (dotimes [_ 3]
     (paint-shape hue)))
 
-(defn- save-to-disk
-  []
-  (q/save-frame (pp/cl-format nil
-                              "sketches/~d-~2,'0d-~2,'0d-~2,'0d-~2,'0d-~2,'0d.jpeg"
-                              (q/year) (q/month) (q/day) (q/hour) (q/minute) (q/seconds))))
+(defn save-frame-to-disk
+  ([]
+   (q/save-frame (pp/cl-format nil
+                               "frames/~d-~2,'0d-~2,'0d-~2,'0d-~2,'0d-~2,'0d-####.jpeg"
+                               (q/year) (q/month) (q/day)
+                               (q/hour) (q/minute) (q/seconds))))
+  ([state _]
+   (save-frame-to-disk)
+   state))
 
 (defn draw
   []
   (q/no-loop)
-  (paint-gradient (get-in colours [:navajo-white :bg-hue-low])
-                  (get-in colours [:navajo-white :bg-hue-high]))
-  (paint-shapes (get-in colours [:navajo-white :shape-fill]))
-  (save-to-disk))
+  (paint-gradient (get-in colour [:navajo-white :bg-hue-low])
+                  (get-in colour [:navajo-white :bg-hue-high]))
+  (paint-shapes (get-in colour [:navajo-white :shape-fill]))
+  (save-frame-to-disk))
