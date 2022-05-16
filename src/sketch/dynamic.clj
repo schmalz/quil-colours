@@ -22,16 +22,17 @@
 
 (defn initialise
   []
+  (q/smooth)
   (q/color-mode :hsb 360 100 100 1.0))
 
 (defn paint-gradient
   [hue-low hue-high]
   (q/no-stroke)
-  (doseq [y (range 0 800 5)]
-    (q/fill (q/map-range y 0 800 hue-low hue-high)
+  (doseq [y (range 0 900 3)]
+    (q/fill (q/map-range y 0 900 hue-low hue-high)
             32
             100)
-    (q/rect 0 y 800 5)))
+    (q/rect 0 y 900 5)))
 
 (defn paint-shape
   [hue]

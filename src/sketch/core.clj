@@ -13,5 +13,5 @@
 
 (defn refresh
   []
-  (use :reload 'dynamic)
+  (use :reload 'sketch.dynamic)
   (.loop sketch))
