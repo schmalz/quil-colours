@@ -32,7 +32,7 @@
     (q/fill (q/map-range y 0 900 hue-low hue-high)
             32
             100)
-    (q/rect 0 y 900 5)))
+    (q/rect 0 y 900 3)))
 
 (defn paint-shape
   [hue]
